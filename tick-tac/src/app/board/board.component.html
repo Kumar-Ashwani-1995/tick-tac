@@ -1,0 +1,135 @@
+<div>
+    <mat-toolbar color="primary">
+        <button mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span (click)="homeBoard()" style="cursor: pointer;">{{game}}</span>
+        <button mat-icon-button style="margin-left: 50px;" (click)="scoreBoard()">
+            <mat-icon>leaderboard</mat-icon>leaderboard
+        </button>
+        <button mat-icon-button style="margin-left: 70px;" (click)="resetNow()">
+            <mat-icon>restart_alt</mat-icon>Reset
+        </button>
+
+
+    </mat-toolbar>
+
+    <div *ngIf="boardDashboard">
+
+        <div class="winner bottomDiv">
+
+            <div *ngIf="winner_bool">
+                <mat-card class="example-card">
+                    <mat-card-title-group>
+                        <mat-card-title class="winnerDisplay">Winner</mat-card-title>
+                        <mat-card-subtitle>{{winner}}</mat-card-subtitle>
+                        <img mat-card-sm-image src="https://www.pngrepo.com/png/246337/180/trophy-winner.png">
+                    </mat-card-title-group>
+                    <mat-card-content class="winnerDisplay" style="margin-top: 10px;">
+                        <div>Congratulations</div>
+
+                        <small style="font-size: small;">
+                            next match in {{stopper}} secs
+                        </small>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div *ngIf="draw_bool">
+                <mat-card class="example-card">
+                    <mat-card-title-group>
+                        <mat-card-title class="winnerDisplay">Draw</mat-card-title>
+                        <mat-card-subtitle>Try new</mat-card-subtitle>
+                        <img mat-card-sm-image
+                            src="https://www.codeandweb.com/blog/2012/05/24/getting-started-with-coronasdk-and-physicseditor-tutorial/Duck.png">
+                    </mat-card-title-group>
+                    <mat-card-content class="winnerDisplay" style="margin-top: 10px;">
+                        <div>The Match is draw</div>
+
+                        <small style="font-size: small;">
+                            next match in {{stopper}} secs
+                        </small>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+        </div>
+        <div class="mar">
+            <div>
+                <div *ngIf="gameValue" class="turn">
+                    <h1>{{player1}}'s Turn : x</h1>
+                </div>
+                <div *ngIf="!gameValue" class="turn">
+                    <h1>{{player1}}'s Turn : O</h1>
+                </div>
+            </div>
+            <div class="div2">
+
+
+                <mat-grid-list cols="3">
+                    <mat-grid-tile *ngFor="let tile of tiles" [style.background]="tile.color"
+                        (click)="gameButton(tile.text)">
+                        <h1 class="display">{{tile.value}}</h1>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+            <button class="reset" mat-icon-button (click)="resetNow()">
+                Reset<mat-icon>restart_alt</mat-icon>
+            </button>
+
+        </div>
+    </div>
+    <div *ngIf="scoreDashboard" style="margin: 50px 40px;">
+        <h1 class="mat-display-3" style="text-align: center;"> Score Board</h1>
+        <div class="scoreboardView">
+            <div>
+                <div style="display: flex;">
+                    <div style="margin-right: 5px;">
+                        <h1>Player 1 : X Symbol</h1>
+
+                        <mat-label>Player 1 :</mat-label>
+                        <input placeholder="Raven Hunter" [value]="player1" name="player1" [(ngModel)]="player1">
+
+
+                    </div>
+                    <div style="margin: 30px 30px;">
+                        <h1>Won {{player1Win}}</h1>
+
+
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div style="margin-right: 5px;">
+                        <h1>Player 2 : O Symbol</h1>
+
+                        <label>Player 2 : </label>
+                        <input placeholder="Night Fury" [value]="player2" [(ngModel)]="player2">
+
+                    </div>
+                    <div style="margin: 30px 30px;">
+                        <h1>Won {{player2Win}}</h1>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div>
+                <div *ngIf="player1Win!=player2Win;else other_content">
+                    <img src="https://www.pngrepo.com/png/246337/180/trophy-winner.png">
+                    <h1>Winner {{player1Win>player2Win?player1:player2}}</h1>
+                </div>
+
+                <ng-template #other_content>
+                    <img
+                        src="https://www.codeandweb.com/blog/2012/05/24/getting-started-with-coronasdk-and-physicseditor-tutorial/Duck.png">
+                    <div style="margin-bottom: 10px;margin-left: 20px;">
+                        <h1>Keep Trying</h1>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+
+
+    </div>
+</div>

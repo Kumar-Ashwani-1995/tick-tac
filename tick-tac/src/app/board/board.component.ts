@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import {MatSnackBar,MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
+  import {ThemePalette} from '@angular/material/core';
 
 export interface Tile {
   color: string;
@@ -16,7 +17,7 @@ export interface Tile {
   styleUrls: ['./board.component.css']
 })
 
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit,DoCheck {
   count: number=0;
   winner: string ="NIL";
   winner_bool: boolean=false;
@@ -26,19 +27,38 @@ export class BoardComponent implements OnInit {
   scoreDashboard: boolean=false;
   boardDashboard: boolean=true;
   player1:string="Raven Hunter";
-  player2:string="Night Fury";
+  player2:string="Battle Machine";
   draw_bool: boolean=false;
+  color: ThemePalette = 'primary';
+  compDisable: boolean = false;
 
-  
-  constructor(private _snackBar: MatSnackBar) { }
 
-  ngOnInit(): void {
-  }
   game="Tic-Tak";
   stopper=5;
   gameValue=true;
   player1Win=0;
   player2Win=0;
+  computer=false;
+  
+  constructor(private _snackBar: MatSnackBar) { }
+  ngDoCheck(): void {
+    if(this.count<1){
+      this.gameValue=true;
+    }
+    console.log(this.gameValue,this.winner_bool )
+    if(!this.gameValue && !this.winner_bool && !this.computer){
+       this.compDisable=true;
+      this.computerTurn();
+      setTimeout(() => {
+        this.compDisable=false
+      }, 1500);
+    }
+  }
+
+
+  ngOnInit(): void {
+  }
+
 
   tiles: Tile[] = [
     {text: '0',value:"", cols: 1, rows: 2, color: '#DDBDF1'},
@@ -64,13 +84,14 @@ export class BoardComponent implements OnInit {
   ];
 
   reset(){
-    console.log("a")
     setTimeout(() => {
+      console.log("reset");
      this.tiles=JSON.parse(JSON.stringify(this.backup));
      this.winner_bool=false;
      this.winner="NIL";
      this.count=0;
      this.draw_bool=false;
+     this.gameValue=true;
      
     }, 5000);
 
@@ -86,14 +107,23 @@ export class BoardComponent implements OnInit {
   resetNow(){
     console.log("reset now")
     
-      this.tiles=JSON.parse(JSON.stringify(this.backup)); 
+     this.tiles=JSON.parse(JSON.stringify(this.backup)); 
      this.winner_bool=false;
      this.winner="NIL";
      this.count=0;
      this.draw_bool=false;
-
-
+     this.gameValue=true;
   }
+   resetScoreBoard(){
+      this.player1Win=0;
+      this.player2Win=0;
+      this.tiles=JSON.parse(JSON.stringify(this.backup)); 
+      this.winner="NIL";
+      this.count=0;
+      this.draw_bool=false;
+      this.gameValue=true;
+      this.winner_bool=false;
+   }
 
   checkWinner():string{
     
@@ -148,18 +178,22 @@ export class BoardComponent implements OnInit {
       return "NIL"
   }
   gameButton(text: any){
-      this.count++;
-      console.log(this.count);
+      
+      // console.log(this.count);
       for(let i=0;i<this.tiles.length;i++){
         if(this.tiles[i]["text"]===text && this.tiles[i]["value"]===""){
-          console.log(this.tiles[i]["text"])
+          //console.log(this.tiles[i]["text"])
             if(this.gameValue){
               this.tiles[i]["value"]="X";
+              this.count++;
+              this.gameValue=!this.gameValue;
             }
             else{
               this.tiles[i]["value"]="O";
+              this.count++;
+              this.gameValue=!this.gameValue;
             }
-          if(this.count>4){
+          
             this.winner=this.checkWinner();
             if(this.winner===this.player1){
               this.player1Win++;
@@ -167,12 +201,12 @@ export class BoardComponent implements OnInit {
             else if(this.winner===this.player2){
               this.player2Win++;
             }
-          }
+          
           if(this.winner!=="NIL"){
             this.winner_bool=true;
             this.reset();
           }
-          this.gameValue=!this.gameValue;
+          
         }
         else if(this.tiles[i]["text"]===text && this.tiles[i]["value"]!==""){
           this.errorMsg="Already selected!!!";
@@ -190,6 +224,56 @@ export class BoardComponent implements OnInit {
     this._snackBar.open(message, "close",{
     horizontalPosition: 'center',
     verticalPosition: 'bottom'});
+  }
+
+    computerTurn() {
+      
+      setTimeout(() => {
+        
+        for(let i=0;i<this.tiles.length;i++){
+          if(this.count<1){
+            break;
+          }
+          if(this.tiles[0]["value"]==="X" && this.tiles[1]["value"]==="X" && this.tiles[2]["value"]===""){
+            this.gameButton(this.tiles[2]["text"]);
+            break;
+          }
+          else if(this.tiles[3]["value"]==="X" && this.tiles[4]["value"]==="X" && this.tiles[5]["value"]===""){
+            this.gameButton(this.tiles[5]["text"]);
+            break;
+          }
+          else if(this.tiles[6]["value"]==="X" && this.tiles[7]["value"]==="X" && this.tiles[8]["value"]===""){
+            this.gameButton(this.tiles[8]["text"])
+              break;
+          }
+          else if(this.tiles[0]["value"]==="X" && this.tiles[3]["value"]==="X" && this.tiles[6]["value"]===""){
+            this.gameButton(this.tiles[6]["text"])
+              break;
+          }
+          else if(this.tiles[1]["value"]==="X" && this.tiles[4]["value"]==="X" && this.tiles[7]["value"]==="7"){
+            this.gameButton(this.tiles[7]["text"])
+              break;
+          }
+          else if(this.tiles[2]["value"]==="X" && this.tiles[5]["value"]==="X" && this.tiles[8]["value"]==="8"){
+            this.gameButton(this.tiles[8]["text"])
+              break;
+          }
+          else if(this.tiles[0]["value"]==="X" && this.tiles[4]["value"]==="X" && this.tiles[8]["value"]===""){
+            this.gameButton(this.tiles[8]["text"])
+              break;
+          }
+          else if(this.tiles[2]["value"]==="X" && this.tiles[4]["value"]==="X" && this.tiles[6]["value"]===""){
+            this.gameButton(this.tiles[6]["text"])
+              break;
+          }
+          else if(this.tiles[i]["value"]===""){
+              this.gameButton(this.tiles[i]["text"])
+              break;
+            }}
+
+          }, 1500);
+          
+    
   }
 
 }

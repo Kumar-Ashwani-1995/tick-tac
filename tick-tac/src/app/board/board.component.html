@@ -1,4 +1,5 @@
 <div>
+    <!-- ---------------------------------navbar code--------------------------  -->
     <mat-toolbar color="primary">
         <button mat-icon-button>
             <mat-icon>menu</mat-icon>
@@ -15,6 +16,7 @@
     </mat-toolbar>
 
     <div *ngIf="boardDashboard">
+    <!-- ---------------------------------Result code--------------------------  -->
 
         <div class="winner bottomDiv">
 
@@ -53,23 +55,37 @@
             </div>
 
         </div>
+    <!-- ---------------------------------Game Board code--------------------------  -->
         <div class="mar">
             <div>
                 <div *ngIf="gameValue" class="turn">
                     <h1>{{player1}}'s Turn : x</h1>
                 </div>
-                <div *ngIf="!gameValue" class="turn">
+                <div *ngIf="!gameValue && computer" class="turn">
                     <h1>{{player2}}'s Turn : O</h1>
+                </div>
+                <div *ngIf="!gameValue && !computer" class="turn">
+                    <h1>Computer's Turn : O</h1>
                 </div>
             </div>
             <div class="div2">
 
 
                 <mat-grid-list cols="3">
-                    <mat-grid-tile *ngFor="let tile of tiles" [style.background]="tile.color"
-                        (click)="gameButton(tile.text)">
-                        <h1 class="display">{{tile.value}}</h1>
-                    </mat-grid-tile>
+                    <div>
+                        <div *ngIf="compDisable">
+                            <mat-grid-tile *ngFor="let tile of tiles" [style.background]="tile.color" matRipple (click)="gameButton(tile.text)"
+                                style="pointer-events:none">
+                                <h1 class="display">{{tile.value}}</h1>
+                            </mat-grid-tile>
+                        </div>
+                        <div *ngIf="!compDisable">
+                            <mat-grid-tile *ngFor="let tile of tiles" [style.background]="tile.color" matRipple (click)="gameButton(tile.text)"
+                                style="pointer-events:auto">
+                                <h1 class="display">{{tile.value}}</h1>
+                            </mat-grid-tile>
+                        </div>
+                    </div>
                 </mat-grid-list>
             </div>
             <button class="reset" mat-icon-button (click)="resetNow()">
@@ -79,16 +95,20 @@
         </div>
     </div>
     <div *ngIf="scoreDashboard" style="margin: 50px 40px;">
-        <h1 class="mat-display-3" style="text-align: center;"> Score Board</h1>
+        <h1 class="mat-display-3" style="text-align: center;margin-left: -65px;"> Score Board</h1>
+        
+     <!-- ---------------------------------Sore Board code--------------------------  -->
         <div class="scoreboardView">
             <div>
                 <div style="display: flex;">
                     <div style="margin-right: 5px;">
                         <h1>Player 1 : X Symbol</h1>
 
-                        <mat-label>Player 1 :</mat-label>
-                        <input placeholder="Raven Hunter" [value]="player1" name="player1" [(ngModel)]="player1">
-
+                        <label>Player 1 :</label>
+                        
+                        <div>
+                            <input placeholder="Raven Hunter" [value]="player1" name="player1" [(ngModel)]="player1">
+                        </div>
 
                     </div>
                     <div style="margin: 30px 30px;">
@@ -101,8 +121,24 @@
                     <div style="margin-right: 5px;">
                         <h1>Player 2 : O Symbol</h1>
 
-                        <label>Player 2 : </label>
-                        <input placeholder="Night Fury" [value]="player2" [(ngModel)]="player2">
+                        <label style="display: flex;">Player 2 : 
+                            <div >
+                                <mat-icon style="margin-left: 20px;">precision_manufacturing</mat-icon>
+                                <mat-slide-toggle [(ngModel)]="computer" style="margin-left: 10px;position: absolute;margin-top: -1px;" [color]="color">
+                                
+                                </mat-slide-toggle>
+                                <mat-icon style="margin-left: 55px;">face</mat-icon>
+                            </div>
+                                
+                            
+                        </label>
+                        <div *ngIf="computer">
+                            <input placeholder="Bot Fury" [value]="player2" name="player2" [(ngModel)]="player2">
+                        </div>
+                        <div *ngIf="!computer">
+                            <input placeholder="Battle Machine" [value]="player2" name="player2" [(ngModel)]="player2" >
+                        </div>
+                        
 
                     </div>
                     <div style="margin: 30px 30px;">
@@ -115,19 +151,25 @@
 
 
             <div>
-                <div *ngIf="player1Win!=player2Win;else other_content">
-                    <img src="https://www.pngrepo.com/png/246337/180/trophy-winner.png">
-                    <h1>Winner {{player1Win>player2Win?player1:player2}}</h1>
-                </div>
-
-                <ng-template #other_content>
-                    <img
-                        src="https://www.codeandweb.com/blog/2012/05/24/getting-started-with-coronasdk-and-physicseditor-tutorial/Duck.png">
-                    <div style="margin-bottom: 10px;margin-left: 20px;">
-                        <h1>Keep Trying</h1>
+                <div style="border: 2px solid;padding: 3px;">
+                    <div *ngIf="player1Win!=player2Win;else other_content">
+                        <img src="https://www.pngrepo.com/png/246337/180/trophy-winner.png" style="padding: 50px;">
+                        <h1 style="margin-left: 10px;"> Winner {{player1Win>player2Win?player1:player2}}</h1>
                     </div>
-                </ng-template>
+                    
+                    <ng-template #other_content>
+                        <img style="padding: 50px;"
+                            src="https://www.codeandweb.com/blog/2012/05/24/getting-started-with-coronasdk-and-physicseditor-tutorial/Duck.png">
+                        <div style="margin-bottom: 10px;margin-left: 20px;">
+                            <h1>Keep Trying</h1>
+                        </div>
+                    </ng-template>
+                </div>
+                <button mat-icon-button (click)="resetScoreBoard()" style="margin-left: 20px;">
+                    <mat-icon>delete_forever</mat-icon>Clear Progress
+                </button>
             </div>
+            
         </div>
 
 

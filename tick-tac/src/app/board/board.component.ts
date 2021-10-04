@@ -26,8 +26,8 @@ export class BoardComponent implements OnInit,DoCheck {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   scoreDashboard: boolean=false;
   boardDashboard: boolean=true;
-  player1:string="Raven Hunter";
-  player2:string="Battle Machine";
+  player1:string="Raven";
+  player2:string="Machine";
   draw_bool: boolean=false;
   color: ThemePalette = 'primary';
   compDisable: boolean = false;

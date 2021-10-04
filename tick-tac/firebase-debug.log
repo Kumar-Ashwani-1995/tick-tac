@@ -1,0 +1,18 @@
+[debug] [2021-10-04T08:23:12.101Z] ----------------------------------------------------------------------
+[debug] [2021-10-04T08:23:12.108Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2021-10-04T08:23:12.109Z] CLI Version:   9.18.0
+[debug] [2021-10-04T08:23:12.109Z] Platform:      linux
+[debug] [2021-10-04T08:23:12.110Z] Node Version:  v14.17.6
+[debug] [2021-10-04T08:23:12.164Z] Time:          Mon Oct 04 2021 13:53:12 GMT+0530 (India Standard Time)
+[debug] [2021-10-04T08:23:12.165Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-10-04T08:23:12.352Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-10-04T08:23:12.352Z] > authorizing via signed-in user (ash123.ak70@gmail.com)
+[debug] [2021-10-04T08:23:12.353Z] [iam] checking project tick-tac-oldschool for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2021-10-04T08:23:12.355Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/tick-tac-oldschool:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2021-10-04T08:23:14.197Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 04 Oct 2021 08:23:14 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1152","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-10-04T08:23:14.201Z] > refreshing access token with scopes: []
+[debug] [2021-10-04T08:23:14.201Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-10-04T08:23:14.404Z] <<< HTTP RESPONSE 200 {"date":"Mon, 04 Oct 2021 08:23:14 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}

@@ -314,8 +314,8 @@ export class BoardComponent implements OnInit,DoCheck {
             this.gameButton(this.tiles[2]["text"])
               break;
           }
-          else if(this.tiles[1]["value"]===""){
-              this.gameButton(this.tiles[4]["text"])
+          else if(this.tiles[0]["value"]===""){
+              this.gameButton(this.tiles[0]["text"])
               break;
             }
           else if(this.tiles[4]["value"]===""){

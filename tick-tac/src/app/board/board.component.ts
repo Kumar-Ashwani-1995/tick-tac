@@ -238,16 +238,56 @@ export class BoardComponent implements OnInit,DoCheck {
             this.gameButton(this.tiles[2]["text"]);
             break;
           }
+          else if(this.tiles[0]["value"]==="X" && this.tiles[1]["value"]==="" && this.tiles[2]["value"]==="X"){
+            this.gameButton(this.tiles[1]["text"]);
+            break;
+          }
+          else if(this.tiles[0]["value"]==="O" && this.tiles[1]["value"]==="O" && this.tiles[2]["value"]===""){
+            this.gameButton(this.tiles[2]["text"]);
+            break;
+          }
+          else if(this.tiles[0]["value"]==="O" && this.tiles[1]["value"]==="" && this.tiles[2]["value"]==="O"){
+            this.gameButton(this.tiles[1]["text"]);
+            break;
+          }
+          else if(this.tiles[0]["value"]==="" && this.tiles[1]["value"]==="O" && this.tiles[2]["value"]==="O"){
+            this.gameButton(this.tiles[0]["text"]);
+            break;
+          }
           else if(this.tiles[3]["value"]==="X" && this.tiles[4]["value"]==="X" && this.tiles[5]["value"]===""){
             this.gameButton(this.tiles[5]["text"]);
+            break;
+          }
+          else if(this.tiles[3]["value"]==="O" && this.tiles[4]["value"]==="O" && this.tiles[5]["value"]===""){
+            this.gameButton(this.tiles[5]["text"]);
+            break;
+          }
+          else if(this.tiles[3]["value"]==="O" && this.tiles[4]["value"]==="" && this.tiles[5]["value"]==="O"){
+            this.gameButton(this.tiles[4]["text"]);
+            break;
+          }
+          else if(this.tiles[3]["value"]==="" && this.tiles[4]["value"]==="O" && this.tiles[5]["value"]==="O"){
+            this.gameButton(this.tiles[3]["text"]);
+            break;
+          }
+          else if(this.tiles[3]["value"]==="X" && this.tiles[4]["value"]==="" && this.tiles[5]["value"]==="X"){
+            this.gameButton(this.tiles[4]["text"]);
             break;
           }
           else if(this.tiles[6]["value"]==="X" && this.tiles[7]["value"]==="X" && this.tiles[8]["value"]===""){
             this.gameButton(this.tiles[8]["text"])
               break;
           }
+           else if(this.tiles[6]["value"]==="X" && this.tiles[7]["value"]==="" && this.tiles[8]["value"]==="X"){
+            this.gameButton(this.tiles[7]["text"])
+              break;
+          }
           else if(this.tiles[0]["value"]==="X" && this.tiles[3]["value"]==="X" && this.tiles[6]["value"]===""){
             this.gameButton(this.tiles[6]["text"])
+              break;
+          }
+          else if(this.tiles[0]["value"]==="X" && this.tiles[3]["value"]==="" && this.tiles[6]["value"]==="X"){
+            this.gameButton(this.tiles[3]["text"])
               break;
           }
           else if(this.tiles[1]["value"]==="X" && this.tiles[4]["value"]==="X" && this.tiles[7]["value"]==="7"){
@@ -266,6 +306,30 @@ export class BoardComponent implements OnInit,DoCheck {
             this.gameButton(this.tiles[6]["text"])
               break;
           }
+          else if(this.tiles[2]["value"]==="O" && this.tiles[4]["value"]==="O" && this.tiles[6]["value"]===""){
+            this.gameButton(this.tiles[6]["text"])
+              break;
+          }
+          else if(this.tiles[2]["value"]==="" && this.tiles[4]["value"]==="O" && this.tiles[6]["value"]==="O"){
+            this.gameButton(this.tiles[2]["text"])
+              break;
+          }
+          else if(this.tiles[1]["value"]===""){
+              this.gameButton(this.tiles[4]["text"])
+              break;
+            }
+          else if(this.tiles[4]["value"]===""){
+              this.gameButton(this.tiles[4]["text"])
+              break;
+            }
+          else if(this.tiles[6]["value"]===""){
+              this.gameButton(this.tiles[6]["text"])
+              break;
+            }
+          else if(this.tiles[8]["value"]===""){
+              this.gameButton(this.tiles[8]["text"])
+              break;
+            }
           else if(this.tiles[i]["value"]===""){
               this.gameButton(this.tiles[i]["text"])
               break;

@@ -31,8 +31,6 @@
 }
 .bottomDiv {
   position: absolute;
-  top: 320px;
-  left: 630px;
   z-index: 99;
 }
 .example-form {

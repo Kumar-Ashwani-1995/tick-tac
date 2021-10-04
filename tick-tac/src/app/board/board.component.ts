@@ -294,6 +294,10 @@ export class BoardComponent implements OnInit,DoCheck {
             this.gameButton(this.tiles[7]["text"])
               break;
           }
+          else if(this.tiles[1]["value"]==="" && this.tiles[4]["value"]==="O" && this.tiles[7]["value"]==="O"){
+            this.gameButton(this.tiles[1]["text"])
+              break;
+          }
           else if(this.tiles[2]["value"]==="X" && this.tiles[5]["value"]==="X" && this.tiles[8]["value"]==="8"){
             this.gameButton(this.tiles[8]["text"])
               break;
@@ -322,6 +326,10 @@ export class BoardComponent implements OnInit,DoCheck {
               this.gameButton(this.tiles[4]["text"])
               break;
             }
+          else if(this.tiles[7]["value"]==="" && this.tiles[8]["value"]==="X"){
+            this.gameButton(this.tiles[7]["text"])
+            break;
+          }
           else if(this.tiles[6]["value"]===""){
               this.gameButton(this.tiles[6]["text"])
               break;
